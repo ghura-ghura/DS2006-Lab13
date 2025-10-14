@@ -3,7 +3,6 @@ import sys
 import copy
 import pandas as pd 
 
-
 # Dice class for the number of sides of the die and the roll mapping that we had previously
 class Die():
     def __init__(self, sides:int):
@@ -24,7 +23,7 @@ class Die():
 class Player():
     def __init__(self, name: str, email: str, country: str, die1: Die, die2: Die):
         self.name = name
-        self.age = email
+        self.email = email
         self.country = country
         self.die1 = die1
         self.die2 = die2
@@ -44,11 +43,10 @@ class Player():
     def add_win(self):
         self.wins += 1 
 
-
     
 # Game controller that runs the game 
 class Gamecontroller():
-    def __init__(self, players, winning_score:3):
+    def __init__(self, players, winning_score=3):
         self.players = players
         self.winning_score = winning_score
         self.rounds_played = 0 
@@ -60,26 +58,44 @@ class Gamecontroller():
         while self.over is not True:
             self.rounds_played += 1 
             print(f"Rounds played for this game {self.rounds_played} ")
-
+        
+            # Loop over and do the rolls 
             curr_rolls = {}
-            for i in self.players: 
+            for player in self.players: 
                 roll = player.make_roll()
                 curr_rolls[player.name] = roll
+       
+            # Find the max roll value 
+            max_roll = max(curr_rolls.values())
+        
+            winners = []
+            for name, roll in curr_rolls.items():
+                if roll == max_roll:
+                    winners.append(name)
+
+            # Update the winners 
+            for player in self.players:
+                if player.name in winners:
+                    player.add_win()
+                    if player.wins >= self.winning_score:
+                        print(f"Our plauyer, {player.name} is the new champion of our ultimate version of battle of dices")
+                        self.over = True
+                        break
             
+            if self.over is True:
+                break
 
-
+        print("\n--- Final Scores testprint ---")
+        for player in self.players:
+            print(f"{player.name}: {player.wins} wins in {len(player.rollsintotal)} rolls total.")
+        print(f"\nGame over after {self.rounds_played} rounds!")
 
 
     #Save the results to the file 
 
 
-
 """
 class Scoreboard():
-    def __init__(self):
-        # We need to incert here 
-
-class Diemapping():
     def __init__(self):
         # We need to incert here 
 """
@@ -99,17 +115,16 @@ for i in range(number_of_players):
     name = input(str(f"What is the name of Player {i+1}? "))
     email = input(str(f"What is the email of Player {i+1}? "))
     country = input(str(f"What is the country of origin of Player {i+1}? "))
-    die_1 = input(f"Please enter the first die that the player {name} should roll with? \n You can chose from the selection of 4 .. 100 sides? ")
-    die_2 = input(f"Please enter the first die that the player {name} should roll with? \n You can chose from the selection of 4 .. 100 sides? ")
+    die_1 = Die(int(input(f"Please enter the first die that the player {name} should roll with? \n You can chose from the selection of 4 .. 100 sides? ")))
+    die_2 = Die(int(input(f"Please enter the first die that the player {name} should roll with? \n You can chose from the selection of 4 .. 100 sides? ")))
     player = Player(name, email, country, die_1, die_2)
     players.append(player)
 
-## 2. We need to map the die to what die it actually corresponds and 
+## 2. We need to utilize the gamecontroller and run the game 
+game = Gamecontroller(players, winning_score=3)
+game.Play_game()
 
 
-## 3. We need to utilize the gamecontroller and run the game 
-
-
-## 4. Once we have a winner we need to store the information to a seperate file 
+## 3. Once we have a winner we need to store the information to a seperate file either we do this in the class or as previously here. 
 
 
