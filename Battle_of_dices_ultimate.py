@@ -3,7 +3,6 @@ import sys
 import copy
 import pandas as pd 
 
-
 # Dice class for the number of sides of the die and the roll mapping that we had previously
 class Die():
     def __init__(self, sides:int):
