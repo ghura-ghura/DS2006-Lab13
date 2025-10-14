@@ -1,0 +1,25 @@
+Player information: 
+* Name: Alex
+* Email: alex@gmail.com
+* Country: Sweden
+* Wins: 3 
+* Name: Karthik
+* Email: karrthik@gmail.com
+* Country: India
+* Wins: 0 
+* Name: Aditya
+* Email: aditya@gmail.com
+* Country: India
+* Wins: 0 
+* Name: Thomas
+* Email: thomas@gmail.com
+* Country: Germany
+* Wins: 0 
+
+Game rounds:
+Round 1:
+ Alex rolled 77, Karthik rolled 5, Aditya rolled 11, Thomas rolled 12
+Round 2:
+ Alex rolled 38, Karthik rolled 3, Aditya rolled 13, Thomas rolled 37
+Round 3:
+ Alex rolled 155, Karthik rolled 2, Aditya rolled 7, Thomas rolled 24
