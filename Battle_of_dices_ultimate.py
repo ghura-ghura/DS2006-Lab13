@@ -45,7 +45,7 @@ class Player():
 
     
 # Game controller that runs the game 
-class Gamecontroller():
+class Gamecontroller:
     def __init__(self, players, winning_score=3):
         self.players = players
         self.winning_score = winning_score
@@ -84,21 +84,48 @@ class Gamecontroller():
             
             if self.over is True:
                 break
-
+        # Test to see if the game works... 
+        """
         print("\n--- Final Scores testprint ---")
         for player in self.players:
             print(f"{player.name}: {player.wins} wins in {len(player.rollsintotal)} rolls total.")
         print(f"\nGame over after {self.rounds_played} rounds!")
-
+        """
 
     #Save the results to the file 
+    def save_results(self, filename):
+        with open(filename, "w") as file: 
+            #Player info
+            file.write("Player information: \n")
+
+            for player in self.players:
+                file.write(
+                    f"* Name: {player.name}\n"
+                    f"* Email: {player.email}\n"
+                    f"* Country: {player.country}\n"
+                    f"* Wins: {player.wins} \n"
+                )
+            file.write("\nGame rounds:\n")
+
+            num_rounds = len(self.players[0].rollsintotal)
+
+            # Write each rounds result to the file 
+            for round_index in range(num_rounds):
+                rolls_str = ""
+
+                # Go through each player and build the string step by step 
+                for j, player in enumerate(self.players):
+                    rolls_str += f"{player.name} rolled {player.rollsintotal[round_index]} "
 
 
-"""
-class Scoreboard():
-    def __init__(self):
-        # We need to incert here 
-"""
+                    # Add a comma and space unless it's the last player 
+                    if j < len(self.players) - 1: 
+                        rolls_str += ", "
+                # Now write the full round info to the file 
+                file.write(f"Round {round_index+1}:\n {rolls_str}\n")
+
+        print("\nGame over! Results saved succesfully. ")
+
 
 ## 1. We need to input the number of players that we have along with their info 
 
@@ -124,7 +151,6 @@ for i in range(number_of_players):
 game = Gamecontroller(players, winning_score=3)
 game.Play_game()
 
-
 ## 3. Once we have a winner we need to store the information to a seperate file either we do this in the class or as previously here. 
-
-
+filename = input("\nEnter the filename to which you want to store the results: ")
+game.save_results(filename)
