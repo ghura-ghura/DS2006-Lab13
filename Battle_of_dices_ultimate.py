@@ -1,7 +1,4 @@
 import random 
-import sys
-import copy
-import pandas as pd 
 
 # Dice class for the number of sides of the die and the roll mapping that we had previously
 class Die():
@@ -78,7 +75,7 @@ class Gamecontroller:
                 if player.name in winners:
                     player.add_win()
                     if player.wins >= self.winning_score:
-                        print(f"Our plauyer, {player.name} is the new champion of our ultimate version of battle of dices")
+                        print(f"\nOur player, {player.name} is the new champion of our ultimate version of battle of dices\n")
                         self.over = True
                         break
             
@@ -111,20 +108,19 @@ class Gamecontroller:
 
             # Write each rounds result to the file 
             for round_index in range(num_rounds):
-                rolls_str = ""
+                rolls_results = []
 
                 # Go through each player and build the string step by step 
                 for j, player in enumerate(self.players):
-                    rolls_str += f"{player.name} rolled {player.rollsintotal[round_index]} "
-
-
-                    # Add a comma and space unless it's the last player 
-                    if j < len(self.players) - 1: 
-                        rolls_str += ", "
+                    rolls_results.append(f"{player.name} rolled {player.rollsintotal[round_index]}")
+                
+                rolls_str = ", ".join(rolls_results)
+                 
                 # Now write the full round info to the file 
-                file.write(f"Round {round_index+1}:\n {rolls_str}\n")
+                file.write(f"Round {round_index + 1}:\n {rolls_str}\n")
+                
 
-        print("\nGame over! Results saved succesfully. ")
+        print("\nGame over! Results saved successfully. ")
 
 
 ## 1. We need to input the number of players that we have along with their info 
