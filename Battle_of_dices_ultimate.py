@@ -16,7 +16,7 @@ class Die():
          return (f"D{self.sides}")
 
 
-# Define class for Players and their rolling/wins 
+# Define class for Players and their rolling/wins and checking their types as a precaution to avioid errors
 class Player():
     def __init__(self, name: str, email: str, country: str, die1: Die, die2: Die):
         self.name = name
@@ -81,7 +81,7 @@ class Gamecontroller:
             
             if self.over is True:
                 break
-        # Test to see if the game works... 
+        # Test to see if the game works before doing the filewriting part
         """
         print("\n--- Final Scores testprint ---")
         for player in self.players:
@@ -131,7 +131,6 @@ players = []
 # The input for how many plyers that we should have 
 number_of_players = int(input("Enter how many players that you want to play this game! "))
 
-######### POSSIBILITY TO CHECK INPUT? ########
 
 # Loop over the input so that we can store the objects and get the dies for each player 
 for i in range(number_of_players):
