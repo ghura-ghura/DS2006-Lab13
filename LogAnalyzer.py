@@ -36,7 +36,7 @@ class LogAnalyser:
                         if " rolled " in part: 
                             name, _, roll = part.partition(" rolled ")
                             roll = roll.strip()
-                            # Only process numeric rolls -- Might be bad if we want this to be more flexible 
+                            # Only process numeric rolls -- Might be bad if we want this to be more flexible...
                             if roll.isdigit():    
                                 rolls_dict[name] = int(roll)
                                 # Add tplayer name to the player list if it's not already addded
